@@ -1,6 +1,8 @@
 //@Author Joni Tuhkanen
+import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app.jsx"
+import Styles from "./styles/style.css"
 
 ReactDOM.render(
   <App />,

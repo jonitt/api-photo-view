@@ -1,7 +1,7 @@
 {
   "name": "pictureview",
   "version": "1.0.0",
-  "description": "Tool for vieweing pictures from api",
+  "description": "Tool for viewing pictures from api",
   "main": "./dist/main.js",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
@@ -14,11 +14,15 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "bootstrap": "^4.2.1",
     "css-loader": "^2.1.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.7.0",
+    "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.7.0",
+    "react-js-pagination": "^3.0.2",
+    "style-loader": "^0.23.1",
     "webpack": "^4.29.0",
     "webpack-dev-server": "^3.1.14"
   },
