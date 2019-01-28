@@ -6,16 +6,14 @@ import { withRouter } from 'react-router-dom';
 import { Route, Link } from "react-router-dom";
 /*
   @props
-    photos: json object of the photos
+    photos: object of the photos
     photosSize: amount of photos
-    pageNumber: number of page
+    pageNumber: number of page (starts from 1)
     photosPerPage: amount of photo thumbnails to show on a page
 */
 class PhotoList extends React.Component {
   constructor(props) {
     super(props);
-
-    this.photosPerPage = 100;
 
     this.state = {
       "shownThumbnails": []
@@ -26,27 +24,21 @@ class PhotoList extends React.Component {
     this.showThumbnails();
   }
 
-  //show thumbnails of photos
+  //Creates components to show from photos' thumbnails.
+  //The thumbnails also work as links to the full-sized pictures
   showThumbnails() {
-    for(let i = 0; i < 100; i++) {
+    let photosPerPage = parseInt(this.props.photosPerPage);
+    let i = photosPerPage * (parseInt(this.props.pageNumber) - 1);
+    let limit = i + photosPerPage;
+    for(; i < limit; i++) {
       this.state.shownThumbnails[i] =
-        <Link to={"/img/"+i} key={this.generateKey()}>
+        <Link to={this.props.match.url + "/img/" + i} key={this.generateKey()}>
           <PhotoListEntry handleClick={()=>null} num={i} photo={this.props.photos[i]} />
         </Link>
     }
     this.setState({
       "shownThumbnails": this.state.shownThumbnails
     });
-  }
-
-  //show full-sized photo of index in photos
-  openPhoto(index, photos) {
-    /*
-    this.props.history.push("/asdasdsd");
-    this.setState({
-      shownFullSizePhoto: <FullSizePhoto handleOutOfFocus={() => this.closePhoto()} photoUrl={photos[index].url} />
-    });
-    */
   }
 
   //create random key
@@ -65,13 +57,18 @@ class PhotoList extends React.Component {
         <ul>
           {this.state.shownThumbnails}
         </ul>
-        <Route path={"/img/:id(\\d+)"}
-          render={({ match }) => {
-          return(<FullSizePhoto photoUrl={this.props.photos[match.params.id].url} handleOutOfFocus={() => null} />)
-          }}
-        />
+        {/* Routing to full photos based on photo's number (id) */}
+        <Route path={this.props.match.url + "/img/:id(\\d+)"} render={({ match }) => { return(
+          <FullSizePhoto photoUrl={this.props.photos[match.params.id].url}
+          handleOutOfFocus={() => null} linkTo={"/page" + this.props.pageNumber} />
+          )}}
+          />
         <Route path="/pic1" render={() => <FullSizePhoto photoUrl="https://via.placeholder.com/600/d32776" />} />
-        <Pagination itemsCountPerPage={this.props.photosPerPage} totalItemsCount={this.props.photosSize} pageRangeDisplayed={5} itemClass="photo_list_pagination_entry" />
+        {/* Pagination links lead to a page with matching number */}
+        <Pagination onChange={(pageNum) => {
+          this.props.history.push("/page" + pageNum);
+          }} activePage={parseInt(this.props.pageNumber)} itemsCountPerPage={this.props.photosPerPage} totalItemsCount={this.props.photosSize} pageRangeDisplayed={5} itemClass="photo_list_pagination_entry"
+        />
       </div>
     );
   }

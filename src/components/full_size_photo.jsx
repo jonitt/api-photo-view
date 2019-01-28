@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
   @props:
     handleOutOfFocus = handle out of focus
     photoUrl: src of photo
+    linkTo = link to url, when background is clicked
 */
 class FullSizePhoto extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class FullSizePhoto extends React.Component {
   render() {
     return(
       <div>
-        <Link to="/" className="grey_shade_background">
+        <Link to={this.props.linkTo} className="grey_shade_background">
         </Link>
         <img ref={node => this.node = node} src={this.props.photoUrl} className="full_size_photo"></img>
 

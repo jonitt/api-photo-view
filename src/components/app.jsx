@@ -48,15 +48,18 @@ class App extends Component {
 
   render() {
     return(
-      <BrowserRouter>
-        <div className="app">
-          <PageHeader />
-          {this.state.showPhotoList ? <PhotoList photos={this.state.photos} photosSize={this.state.photosSize} pageNumber="1" photosPerPage="100" /> : null}
-          <CustomRouter />
-        </div>
-      </BrowserRouter>
+      <div className="app">
+        <PageHeader />
+        {/*this.state.showPhotoList ? <PhotoList photos={this.state.photos} photosSize={this.state.photosSize} pageNumber="30" photosPerPage="100" /> : null*/}
+        <Route path={"/page:id(\\d+)"} render={({ match }) => { return(
+          this.state.showPhotoList ?
+          <PhotoList photos={this.state.photos} photosSize={this.state.photosSize} pageNumber={match.params.id} photosPerPage="100" />
+          : <div>hi</div>
+          )}}
+        />
+      </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
