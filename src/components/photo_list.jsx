@@ -18,6 +18,7 @@ class PhotoList extends React.Component {
     this.state = {
       "shownThumbnails": [],
       "shownFullSizePhoto": null,
+      "showFullSizePhoto": false,
       "photoRoutes": []
     };
   }
@@ -29,7 +30,7 @@ class PhotoList extends React.Component {
   }
 
   setRoutes(photos) {
-    for(let i = 0; i < photos.length; i++) {
+    /*for(let i = 0; i < photos.length; i++) {
       this.state.photoRoutes[i] =
         <Route path={"/img" + i} key={this.generateKey()}
           render={() => <FullSizePhoto photoUrl={photos[i].url} handleOutOfFocus={() => this.closePhoto()} />}>
@@ -38,13 +39,16 @@ class PhotoList extends React.Component {
     console.log(this.state.photoRoutes)
     this.setState({
       photoRoutes: this.state.photoRoutes
-    });
+    });*/
   }
 
   //show thumbnails of photos
   showThumbnails() {
     for(let i = 0; i < 100; i++) {
-      this.state.shownThumbnails[i] = <Link to={"/img"+i}><PhotoListEntry handleClick={(index) => this.openPhoto(index, this.props.photos)} num={i} photo={this.props.photos[i]} key={this.generateKey()} /></Link>
+      this.state.shownThumbnails[i] =
+        <Link to={"/img/"+i} key={this.generateKey()}>
+          <PhotoListEntry handleClick={(index) => this.openPhoto(index, this.props.photos)} num={i} photo={this.props.photos[i]} />
+        </Link>
     }
     this.setState({
       "shownThumbnails": this.state.shownThumbnails
@@ -82,6 +86,10 @@ class PhotoList extends React.Component {
       );
   }
 
+  componentDidCatch(e, i) {
+    console.log(e + " : " + i);
+  }
+
   render() {
     return(
       <div className="photo_list">
@@ -92,6 +100,11 @@ class PhotoList extends React.Component {
         <Route path="/pic1" render={() => <FullSizePhoto photoUrl="https://via.placeholder.com/600/d32776" />} />
         <Pagination itemsCountPerPage={10} totalItemsCount={450} pageRangeDisplayed={5} itemClass="photo_list_pagination_entry" />
         {this.state.photoRoutes}
+        <Route path={"/img/:id(\\d+)"}
+          render={({ match }) => {
+            return(<FullSizePhoto photoUrl={this.props.photos[match.params.id].url} handleOutOfFocus={() => this.closePhoto()} />)
+          }}
+        />
       </div>
     );
   }

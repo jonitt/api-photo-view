@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 /*
   @props:
@@ -31,8 +32,11 @@ class FullSizePhoto extends React.Component {
 
   render() {
     return(
-      <div className="grey_shade_background">
+      <div>
+        <Link to="/" className="grey_shade_background">
+        </Link>
         <img ref={node => this.node = node} src={this.props.photoUrl} className="full_size_photo"></img>
+
       </div>
     );
   }
