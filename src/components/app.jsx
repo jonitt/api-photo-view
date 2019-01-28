@@ -15,7 +15,8 @@ class App extends Component {
     this.fetchPhotos();
 
     this.state = {
-      photos: [0, 0],
+      photos: [],
+      photosSize: 0,
       showPhotoList: false
     }
   }
@@ -26,22 +27,34 @@ class App extends Component {
       .then((json) => {
         this.setState({
           photos: json,
+          photosSize: this.calcSize(json),
           showPhotoList: true
         });
-        console.log(json);
-
       });
+  }
+
+  /*
+  count the size of object, based on it's non-inherited properties
+  */
+  calcSize(obj) {
+    let key, size = 0;
+    for(key in obj) {
+      if(obj.hasOwnProperty(key)) {
+        size++;
+      }
+    }
+    return size;
   }
 
   render() {
     return(
-      <HashRouter>
+      <BrowserRouter>
         <div className="app">
           <PageHeader />
-          {this.state.showPhotoList ? <PhotoList photos={this.state.photos} /> : null}
+          {this.state.showPhotoList ? <PhotoList photos={this.state.photos} photosSize={this.state.photosSize} pageNumber="1" photosPerPage="100" /> : null}
           <CustomRouter />
         </div>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }

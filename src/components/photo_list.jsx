@@ -1,5 +1,4 @@
 import React from "react";
-//import { withRouter } from 'react-router-dom'
 import Pagination from "react-js-pagination";
 import PhotoListEntry from "./photo_list_entry.jsx";
 import FullSizePhoto from "./full_size_photo.jsx";
@@ -8,6 +7,9 @@ import { Route, Link } from "react-router-dom";
 /*
   @props
     photos: json object of the photos
+    photosSize: amount of photos
+    pageNumber: number of page
+    photosPerPage: amount of photo thumbnails to show on a page
 */
 class PhotoList extends React.Component {
   constructor(props) {
@@ -16,30 +18,12 @@ class PhotoList extends React.Component {
     this.photosPerPage = 100;
 
     this.state = {
-      "shownThumbnails": [],
-      "shownFullSizePhoto": null,
-      "showFullSizePhoto": false,
-      "photoRoutes": []
+      "shownThumbnails": []
     };
   }
 
   componentDidMount() {
     this.showThumbnails();
-
-    this.setRoutes(this.props.photos);
-  }
-
-  setRoutes(photos) {
-    /*for(let i = 0; i < photos.length; i++) {
-      this.state.photoRoutes[i] =
-        <Route path={"/img" + i} key={this.generateKey()}
-          render={() => <FullSizePhoto photoUrl={photos[i].url} handleOutOfFocus={() => this.closePhoto()} />}>
-        </Route>
-    }
-    console.log(this.state.photoRoutes)
-    this.setState({
-      photoRoutes: this.state.photoRoutes
-    });*/
   }
 
   //show thumbnails of photos
@@ -47,7 +31,7 @@ class PhotoList extends React.Component {
     for(let i = 0; i < 100; i++) {
       this.state.shownThumbnails[i] =
         <Link to={"/img/"+i} key={this.generateKey()}>
-          <PhotoListEntry handleClick={(index) => this.openPhoto(index, this.props.photos)} num={i} photo={this.props.photos[i]} />
+          <PhotoListEntry handleClick={()=>null} num={i} photo={this.props.photos[i]} />
         </Link>
     }
     this.setState({
@@ -65,25 +49,9 @@ class PhotoList extends React.Component {
     */
   }
 
-  closePhoto() {
-    this.setState({
-      shownFullSizePhoto: null
-    });
-  }
-
   //create random key
   generateKey() {
     return Math.random().toString(36).substr(2, 16);
-  }
-
-  fetchPhoto(url) {
-    fetch(url, {mode: "no-cors"})
-      .then(res => res.json())
-      .then(json =>
-        this.setState({
-          "shownThumbnails": [this.props.photos[1].thumbnailUrl]
-        })
-      );
   }
 
   componentDidCatch(e, i) {
@@ -97,14 +65,13 @@ class PhotoList extends React.Component {
         <ul>
           {this.state.shownThumbnails}
         </ul>
-        <Route path="/pic1" render={() => <FullSizePhoto photoUrl="https://via.placeholder.com/600/d32776" />} />
-        <Pagination itemsCountPerPage={10} totalItemsCount={450} pageRangeDisplayed={5} itemClass="photo_list_pagination_entry" />
-        {this.state.photoRoutes}
         <Route path={"/img/:id(\\d+)"}
           render={({ match }) => {
-            return(<FullSizePhoto photoUrl={this.props.photos[match.params.id].url} handleOutOfFocus={() => this.closePhoto()} />)
+          return(<FullSizePhoto photoUrl={this.props.photos[match.params.id].url} handleOutOfFocus={() => null} />)
           }}
         />
+        <Route path="/pic1" render={() => <FullSizePhoto photoUrl="https://via.placeholder.com/600/d32776" />} />
+        <Pagination itemsCountPerPage={this.props.photosPerPage} totalItemsCount={this.props.photosSize} pageRangeDisplayed={5} itemClass="photo_list_pagination_entry" />
       </div>
     );
   }
