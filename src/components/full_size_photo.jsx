@@ -2,33 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 /*
+  This component displays a photo in it's fullsize, with a background
+  that directs the user to the set url.
+
   @props:
-    handleOutOfFocus = handle out of focus
     photoUrl: src of photo
     linkTo = link to url, when background is clicked
 */
 class FullSizePhoto extends React.Component {
   constructor(props) {
     super(props);
-
-    this.handleOutOfFocus = this.handleOutOfFocus.bind(this);
-  }
-
-  handleOutOfFocus(e) {
-    //if user clicked inside element, do nothing
-    if(this.node.contains(e.target)) {
-      return;
-    }
-
-    this.props.handleOutOfFocus();
-  }
-
-  componentWillMount() {
-    document.addEventListener('mousedown', this.handleOutOfFocus, false);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleOutOfFocus, false);
   }
 
   render() {
@@ -36,8 +19,7 @@ class FullSizePhoto extends React.Component {
       <div>
         <Link to={this.props.linkTo} className="grey_shade_background">
         </Link>
-        <img ref={node => this.node = node} src={this.props.photoUrl} className="full_size_photo"></img>
-
+        <img src={this.props.photoUrl} className="full_size_photo"></img>
       </div>
     );
   }

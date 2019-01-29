@@ -13,7 +13,6 @@ class PageHeader extends React.Component {
   render() {
     return(
       <div className="page_header">
-
         <div><Link to="/pic1">Testilinkki</Link></div>
       </div>
     );

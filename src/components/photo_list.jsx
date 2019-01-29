@@ -3,7 +3,12 @@ import Pagination from "react-js-pagination";
 import PhotoListEntry from "./photo_list_entry.jsx";
 import FullSizePhoto from "./full_size_photo.jsx";
 import { withRouter, Route, Link,  } from 'react-router-dom';
+
 /*
+  This component lists set amount of photos' thumbnails on a page.
+  The component includes a pagination component, which by using
+  user can browse between different pages.
+
   @props
     photos: object of the photos
     photosSize: amount of photos
@@ -59,10 +64,6 @@ class PhotoList extends React.Component {
     return Math.random().toString(36).substr(2, 16);
   }
 
-  componentDidCatch(e, i) {
-    console.log(e + " : " + i);
-  }
-
   render() {
     return(
       <div className="photo_list">
@@ -73,7 +74,7 @@ class PhotoList extends React.Component {
         {/* Routing to full photos based on photo's number (id) */}
         <Route path={this.props.match.url + "/img/:id(\\d+)"} render={({ match }) => { return(
           <FullSizePhoto photoUrl={this.props.photos[match.params.id].url}
-          handleOutOfFocus={() => null} linkTo={"/page" + this.props.pageNumber} />
+          linkTo={"/page" + this.props.pageNumber} />
           )}}
         />
         {/* Pagination links lead to a page with matching number */}

@@ -1,8 +1,12 @@
+// @Author: Joni Tuhkanen
 import React, { Component } from "react";
 import { withRouter, Link, Route, Switch, Redirect } from "react-router-dom";
 import PhotoList from "./photo_list.jsx";
 import PageHeader from "./page_header.jsx";
 
+/*
+  This is the main component. In charge of the shown components and some routing 
+*/
 class App extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +55,10 @@ class App extends Component {
     return(
       <div className="app">
         <PageHeader />
-        {/*this.state.showPhotoList ? <PhotoList photos={this.state.photos} photosSize={this.state.photosSize} pageNumber="30" photosPerPage="100" /> : null*/}
+        {/*
+          Routing for the listing of photos. By default, user is directed
+          to the first page of photos.
+        */}
         <Switch>
           <Route path={"/page:id(\\d+)"} render={({ match }) => { return(
             this.state.showPhotoList ?
