@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HashRouter, BrowserRouter, Link, Route } from "react-router-dom";
+import { HashRouter, BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import PhotoList from "./photo_list.jsx";
 import PageHeader from "./page_header.jsx";
 import CustomRouter from "./custom_router.jsx";
@@ -46,6 +46,10 @@ class App extends Component {
     return size;
   }
 
+  redirectTo(url) {
+    this.props.history.push(url);
+  }
+
   render() {
     return(
       <div className="app">
@@ -53,8 +57,8 @@ class App extends Component {
         {/*this.state.showPhotoList ? <PhotoList photos={this.state.photos} photosSize={this.state.photosSize} pageNumber="30" photosPerPage="100" /> : null*/}
         <Route path={"/page:id(\\d+)"} render={({ match }) => { return(
           this.state.showPhotoList ?
-          <PhotoList photos={this.state.photos} photosSize={this.state.photosSize} pageNumber={match.params.id} photosPerPage="100" />
-          : <div>hi</div>
+          <PhotoList handleRedirect={(url) => this.redirectTo(url)} photos={this.state.photos} photosSize={this.state.photosSize} pageNumber={match.params.id} photosPerPage="100" />
+          : null
           )}}
         />
       </div>

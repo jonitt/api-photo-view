@@ -3,7 +3,7 @@ import Pagination from "react-js-pagination";
 import PhotoListEntry from "./photo_list_entry.jsx";
 import FullSizePhoto from "./full_size_photo.jsx";
 import { withRouter } from 'react-router-dom';
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Redirect } from "react-router-dom";
 /*
   @props
     photos: object of the photos
@@ -16,12 +16,20 @@ class PhotoList extends React.Component {
     super(props);
 
     this.state = {
-      "shownThumbnails": []
+      "shownThumbnails": [],
+      "redirectElsewhere": false,
+      "redirectTo": ""
     };
   }
 
   componentDidMount() {
     this.showThumbnails();
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.pageNumber != this.props.pageNumber) {
+      this.resetThumbnails();
+    }
   }
 
   //Creates components to show from photos' thumbnails.
@@ -41,6 +49,14 @@ class PhotoList extends React.Component {
     });
   }
 
+  //Remove old shown thumbnails and set new ones.
+  //Also, moves the user to top of page.
+  resetThumbnails() {
+    this.state.shownThumbnails = [];
+    this.showThumbnails();
+    window.scrollTo(0, 0);
+  }
+
   //create random key
   generateKey() {
     return Math.random().toString(36).substr(2, 16);
@@ -51,6 +67,12 @@ class PhotoList extends React.Component {
   }
 
   render() {
+    if(this.state.redirectElsewhere) {
+      this.state.redirectElsewhere = false;
+      return(
+        <Redirect to={this.state.redirectTo} />
+      )
+    }
     return(
       <div className="photo_list">
         {this.state.shownFullSizePhoto}
@@ -62,11 +84,16 @@ class PhotoList extends React.Component {
           <FullSizePhoto photoUrl={this.props.photos[match.params.id].url}
           handleOutOfFocus={() => null} linkTo={"/page" + this.props.pageNumber} />
           )}}
-          />
+        />
         <Route path="/pic1" render={() => <FullSizePhoto photoUrl="https://via.placeholder.com/600/d32776" />} />
         {/* Pagination links lead to a page with matching number */}
         <Pagination onChange={(pageNum) => {
-          this.props.history.push("/page" + pageNum);
+          /*this.setState({
+            redirectElsewhere: true,
+            redirectTo: "/page" + pageNum
+          });*/
+        //  this.props.history.push("/page" + pageNum);
+        this.props.handleRedirect("/page" + pageNum);
           }} activePage={parseInt(this.props.pageNumber)} itemsCountPerPage={this.props.photosPerPage} totalItemsCount={this.props.photosSize} pageRangeDisplayed={5} itemClass="photo_list_pagination_entry"
         />
       </div>
