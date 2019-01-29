@@ -54,7 +54,7 @@ body {
 }
 
 .photo_list_entry {
-  margin: 0 $photo_list_entry_r_padding 8px 0;
+  margin: 0 $photo_list_entry_r_padding 7px 0;
   padding: 0;
   @include photoThumbnailDimensions();
   overflow: hidden;
@@ -76,7 +76,7 @@ body {
 }
 
 .photo_list_pagination_entry {
-  padding: 0.8rem 1.7rem 0.8rem 1.7rem;
+  padding: 1.3rem 1.7rem 1.3rem 1.7rem;
   margin: 0 0 0 0;
   border-top: 1px solid $pagination_border_color;
   border-right: 1px solid $pagination_border_color;
@@ -88,7 +88,7 @@ body {
 }
 
 .photo_list_pagination_entry:hover {
-  background-color: #fafafa;
+  background-color: #fafafa; 
   border-color: #f2f2f2;
   cursor: pointer;
 }
@@ -144,5 +144,5 @@ body {
   z-index: 1;
   position: fixed;
   text-align: center;
-  background-color: rgba(191, 191, 191, 0.5);
+  background-color: rgba(200, 200, 200, 0.4);
 }
