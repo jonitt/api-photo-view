@@ -79,8 +79,10 @@ class PhotoList extends React.Component {
         />
         {/* Pagination links lead to a page with matching number */}
         <Pagination onChange={(pageNum) => {
-        this.props.handleRedirect("/page" + pageNum);
-      }} activePage={parseInt(this.props.pageNumber)} itemsCountPerPage={this.props.photosPerPage} totalItemsCount={this.props.photosSize} pageRangeDisplayed={5} linkClass="photo_list_pagination_entry_link" itemClassFirst="photo_list_pagination_entry photo_list_pagination_entry_first" itemClass="photo_list_pagination_entry"
+          this.props.handleRedirect("/page" + pageNum);
+          }} activePage={parseInt(this.props.pageNumber)} itemsCountPerPage={this.props.photosPerPage} totalItemsCount={this.props.photosSize} pageRangeDisplayed={5} linkClass="photo_list_pagination_entry_link"
+          innerClass="photo_list_pagination" activeClass="photo_list_pagination_selected" activeLinkClass="photo_list_pagination_selected_link"
+          itemClassFirst="photo_list_pagination_entry photo_list_pagination_entry_first" itemClass="photo_list_pagination_entry" hideDisabled="true"
         />
       </div>
     );
