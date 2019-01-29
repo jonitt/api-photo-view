@@ -2,7 +2,7 @@ import React from "react";
 import Pagination from "react-js-pagination";
 import PhotoListEntry from "./photo_list_entry.jsx";
 import FullSizePhoto from "./full_size_photo.jsx";
-import { withRouter, Route, Link,  } from 'react-router-dom';
+import { withRouter, Route, Link } from 'react-router-dom';
 
 /*
   This component lists set amount of photos' thumbnails on a page.
@@ -80,7 +80,7 @@ class PhotoList extends React.Component {
         {/* Pagination links lead to a page with matching number */}
         <Pagination onChange={(pageNum) => {
         this.props.handleRedirect("/page" + pageNum);
-          }} activePage={parseInt(this.props.pageNumber)} itemsCountPerPage={this.props.photosPerPage} totalItemsCount={this.props.photosSize} pageRangeDisplayed={5} itemClass="photo_list_pagination_entry"
+      }} activePage={parseInt(this.props.pageNumber)} itemsCountPerPage={this.props.photosPerPage} totalItemsCount={this.props.photosSize} pageRangeDisplayed={5} linkClass="photo_list_pagination_entry_link" itemClassFirst="photo_list_pagination_entry photo_list_pagination_entry_first" itemClass="photo_list_pagination_entry"
         />
       </div>
     );

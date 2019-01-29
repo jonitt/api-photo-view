@@ -24,7 +24,7 @@ class PhotoListEntry extends React.Component {
     return(
       <li className="photo_list_entry">
         <Link to={this.props.linkTo}>
-          <img onClick={() => this.props.handleClick(this.props.num)} src={this.props.photo.thumbnailUrl}></img>
+          <img className="photo_list_entry_img" onClick={() => this.props.handleClick(this.props.num)} src={this.props.photo.thumbnailUrl}></img>
         </Link>
       </li>
     );

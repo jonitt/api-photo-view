@@ -3,9 +3,10 @@ import React, { Component } from "react";
 import { withRouter, Link, Route, Switch, Redirect } from "react-router-dom";
 import PhotoList from "./photo_list.jsx";
 import PageHeader from "./page_header.jsx";
+import PageNavigator from "./page_navigator.jsx";
 
 /*
-  This is the main component. In charge of the shown components and some routing 
+  This is the main component. In charge of the shown components and some routing
 */
 class App extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class App extends Component {
     this.photosUrl = "http://jsonplaceholder.typicode.com/photos";
 
     this.fetchPhotos();
+
+    this.photosPerPage = 100;
 
     this.state = {
       photos: [],
@@ -62,7 +65,7 @@ class App extends Component {
         <Switch>
           <Route path={"/page:id(\\d+)"} render={({ match }) => { return(
             this.state.showPhotoList ?
-            <PhotoList handleRedirect={(url) => this.redirectTo(url)} photos={this.state.photos} photosSize={this.state.photosSize} pageNumber={match.params.id} photosPerPage="100" />
+            <PhotoList handleRedirect={(url) => this.redirectTo(url)} photos={this.state.photos} photosSize={this.state.photosSize} pageNumber={match.params.id} photosPerPage={this.photosPerPage} />
             : null
             )}}
           />
