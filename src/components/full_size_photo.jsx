@@ -55,7 +55,7 @@ class FullSizePhoto extends React.Component {
         <div className="full_size_photo_image_info_container">
           <img onClick={this.zoomPicture} src={this.props.photoUrl} className={this.state.imgClass}></img>
           <div className={this.state.infoClass}>
-            Laus elatus kalauts kulatus
+            {this.props.title}
           </div>
         </div>
       </div>

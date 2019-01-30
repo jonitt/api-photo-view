@@ -81,7 +81,7 @@ class PhotoList extends React.Component {
         </ul>
         {/* Routing to full photos based on photo's number (id) */}
         <Route path={this.props.match.url + "/img/:id(\\d+)"} render={({ match }) => { return(
-          <FullSizePhoto photoUrl={this.props.photos[match.params.id].url}
+          <FullSizePhoto photoUrl={this.props.photos[match.params.id].url} title={this.props.photos[match.params.id].title}
           linkTo={"/page" + this.props.pageNumber} preventBodyScrolling={() => this.preventBodyScrolling()} allowBodyScrolling={() => this.allowBodyScrolling()} />
           )}}
         />
