@@ -2,9 +2,8 @@
   "name": "pictureview",
   "version": "1.0.0",
   "description": "Tool for viewing pictures from api",
-  "main": "./dist/main.js",
+  "main": "./server/server.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
     "build": "webpack"
   },
   "author": "Joni Tuhkanen",
