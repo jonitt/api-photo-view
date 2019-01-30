@@ -64,6 +64,14 @@ class PhotoList extends React.Component {
     return Math.random().toString(36).substr(2, 16);
   }
 
+  allowBodyScrolling() {
+    document.body.classList.remove("no_scroll");
+  }
+
+  preventBodyScrolling() {
+    document.body.classList.add("no_scroll");
+  }
+
   render() {
     return(
       <div className="photo_list">
@@ -74,7 +82,7 @@ class PhotoList extends React.Component {
         {/* Routing to full photos based on photo's number (id) */}
         <Route path={this.props.match.url + "/img/:id(\\d+)"} render={({ match }) => { return(
           <FullSizePhoto photoUrl={this.props.photos[match.params.id].url}
-          linkTo={"/page" + this.props.pageNumber} />
+          linkTo={"/page" + this.props.pageNumber} preventBodyScrolling={() => this.preventBodyScrolling()} allowBodyScrolling={() => this.allowBodyScrolling()} />
           )}}
         />
         {/* Pagination links lead to a page with matching number */}

@@ -10,7 +10,9 @@
 
 $photo_list_entry_r_padding: 9px;
 
-$header_height: calc(2rem + 35px);
+$header_font_size: 2rem;
+
+$header_height: calc(#{$header_font_size} + 35px);
 
 $pagination_border_color: #dedede;
 
@@ -30,6 +32,16 @@ html {
 body {
   height: 100%;
   width: 100%;
+  box-sizing: border-box;
+}
+
+.no_scroll {
+  overflow: hidden;
+  padding-right: 17px;
+}
+
+.hidden {
+  display: none;
 }
 
 .app {
@@ -45,10 +57,11 @@ body {
   position: fixed;
   z-index: 1;
   background-color: #f7f8fa;
+  font-size: 2rem;
 }
 
 .photo_list {
-  padding: 0 calc(5% - $photo_list_entry_r_padding) 0 5%;
+  padding: 0 0 0 $photo_list_entry_r_padding;
   margin-top: calc(#{$header_height} + 13px);
   text-align: center;
 }
@@ -88,7 +101,7 @@ body {
 }
 
 .photo_list_pagination_entry:hover {
-  background-color: #fafafa; 
+  background-color: #fafafa;
   border-color: #f2f2f2;
   cursor: pointer;
 }
@@ -125,15 +138,58 @@ body {
   color: #fafafa;
 }
 
-.full_size_photo {
-  margin-top: calc(#{$header_height} + 10px);
+.full_size_photo_container {
+  width: 100%;
+  height: 100%;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 90%;
-  max-height: 90%;
+  left: 0;
   z-index: 2;
+  overflow: scroll;
   position: fixed;
+}
+
+.full_size_photo_image_info_container {
+  height: 100%;
+  width: 100%;
+}
+
+%full_size_photo_basics {
+  margin-top: calc(#{$header_height} + 10px);
+  z-index: 3;
+  position: relative;
+}
+
+.full_size_photo {
+  @extend %full_size_photo_basics;
+  height: auto;
+  width: auto;
+  max-width: 80%;
+  max-height: calc(85% - #{$header_height});
+}
+
+.full_size_photo:hover {
+  cursor: zoom-in;
+}
+
+.full_size_photo_zoomed {
+  @extend %full_size_photo_basics;
+}
+
+.full_size_photo_zoomed:hover {
+  cursor: zoom-out;
+}
+
+.full_size_photo_info {
+  box-shadow: 0 4px 3px 1px #1e1e1f;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px 3px 3px 3px;
+  min-height: calc(8px + 1.8rem);
+  width: calc(19rem + 6px);
+  min-width: calc(19rem + 6px);
+  font-size: 1.3rem;
+  overflow: hidden;
+  background-color: #f1f2f6;
 }
 
 .grey_shade_background {
@@ -141,7 +197,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
   position: fixed;
   text-align: center;
   background-color: rgba(200, 200, 200, 0.4);
