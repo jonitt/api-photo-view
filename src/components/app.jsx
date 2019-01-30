@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { withRouter, Link, Route, Switch, Redirect } from "react-router-dom";
 import PhotoList from "./photo_list.jsx";
 import PageHeader from "./page_header.jsx";
-import PageNavigator from "./page_navigator.jsx";
 
 /*
   This is the main component. In charge of the shown components and some routing
