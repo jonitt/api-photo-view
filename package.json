@@ -4,6 +4,8 @@
   "description": "Tool for viewing pictures from api",
   "main": "./server/server.js",
   "scripts": {
+
+    "start": "node server/server.js",
     "build": "webpack"
   },
   "author": "Joni Tuhkanen",
