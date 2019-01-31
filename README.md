@@ -1,1 +1,4 @@
-A small assignment. Program to show pictures from an api
+A program to show photos from an api.
+
+To run locally, run "npm start" in the app's folder.
+Then navigate to "localhost:3000/" to use the app.
