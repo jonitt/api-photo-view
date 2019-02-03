@@ -1,8 +1,8 @@
 // @Author: Joni Tuhkanen
 import React, { Component } from "react";
-import PhotoList from "./photo_list.jsx";
-import PageHeader from "./page_header.jsx";
-import PhotoRouterContainer from "./photo_router_container.jsx";
+import PageHeader from "../page_header/page_header.jsx";
+import PhotoRouterContainer from "../photo_router/photo_router_container.jsx";
+import Style from "./style.scss";
 
 /*
   This is the main component. In charge of the shown components and some routing

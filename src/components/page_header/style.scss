@@ -1,0 +1,12 @@
+@import "../../utils/vars";
+
+.page_header {
+  box-shadow: 0 0 5px 0 #d9dadb;
+  width: 100%;
+  height: $header_height;
+  top: 0;
+  position: fixed;
+  z-index: 1;
+  background-color: #f7f8fa;
+  font-size: 2rem;
+}

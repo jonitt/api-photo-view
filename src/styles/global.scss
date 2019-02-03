@@ -1,0 +1,29 @@
+@import "../utils/vars";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  font-size: 62.5%;
+  font-family: arial;
+  background-color: #ebedf5;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.no_scroll {
+  overflow: hidden;
+  padding-right: 17px;
+}
+
+.hidden {
+  display: none;
+}

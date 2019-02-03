@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import PhotoList from "./photo_list.jsx";
-import PhotoListEntry from "./photo_list_entry.jsx";
+import PhotoListEntry from "../photo_list_entry/photo_list_entry.jsx";
 
 /*
   This component lists set amount of photos' thumbnails on a page.

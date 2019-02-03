@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Style from "./style.scss";
 
 /*
   This component displays a photo in it's fullsize, with a background

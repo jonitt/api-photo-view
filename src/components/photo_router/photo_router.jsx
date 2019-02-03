@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter, Link, Route, Switch, Redirect } from "react-router-dom";
-import PhotoListContainer from "./photo_list_container.jsx";
+import PhotoListContainer from "../photo_list/photo_list_container.jsx";
 
 const PhotoRouter = props => (
   <Switch>

@@ -1,0 +1,19 @@
+@import "../../utils/vars";
+
+.photo_list_entry {
+  margin: 0 $photo_list_entry_r_padding 7px 0;
+  padding: 0;
+  @include photoThumbnailDimensions();
+  background-color: #cbcdd4;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.photo_list_entry_img {
+  @include photoThumbnailMaxDimensions();
+}
+
+.photo_list_entry:hover {
+  filter: brightness(82%);
+  cursor: pointer;
+}

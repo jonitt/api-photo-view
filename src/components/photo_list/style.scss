@@ -1,0 +1,62 @@
+@import "../../utils/vars";
+
+.photo_list {
+  padding: 0 0 0 $photo_list_entry_r_padding;
+  margin-top: calc(#{$header_height} + 13px);
+  text-align: center;
+}
+
+.photo_list_pagination {
+  margin-top: 13px;
+  margin-bottom: 16px;
+}
+
+.photo_list_pagination_entry {
+  padding: 1.3rem 1.7rem 1.3rem 1.7rem;
+  margin: 0 0 0 0;
+  border-top: 1px solid $pagination_border_color;
+  border-right: 1px solid $pagination_border_color;
+  border-bottom: 1px solid $pagination_border_color;
+  list-style-type: none;
+  display: inline-block;
+  font-size: 1.6rem;
+  background-color: #f2f3f5;
+}
+
+.photo_list_pagination_entry:hover {
+  background-color: #fafafa;
+  border-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.photo_list_pagination_entry:active {
+  background-color: #c2c2c2;
+  border-color: #b5b5b5;
+  cursor: pointer;
+}
+
+.photo_list_pagination_selected {
+  box-shadow: inset 0 0 3px 2px #7890f0;
+  border-color: #7890f0;
+  background-color: #8099ff;
+}
+
+.photo_list_pagination_selected:hover {
+  background-color: #8099ff;
+  border-color: #7890f0;
+}
+
+.photo_list_pagination_entry_first {
+  border-left: 1px solid $pagination_border_color;
+}
+
+.photo_list_pagination_entry_link {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+
+.photo_list_pagination_selected_link {
+  color: #fafafa;
+}

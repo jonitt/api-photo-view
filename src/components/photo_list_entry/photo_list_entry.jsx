@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Style from "./style.scss";
 
 /*
   This component shows a photos thumbnail picture as a clickable link,

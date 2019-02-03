@@ -1,0 +1,17 @@
+@mixin photoThumbnailDimensions() {
+  height: 150px;
+  width: 150px;
+}
+
+@mixin photoThumbnailMaxDimensions() {
+  height: 150px;
+  width: 150px;
+}
+
+$photo_list_entry_r_padding: 9px;
+
+$header_font_size: 2rem;
+
+$header_height: calc(#{$header_font_size} + 35px);
+
+$pagination_border_color: #dedede;

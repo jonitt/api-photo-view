@@ -1,8 +1,8 @@
 import React from "react";
 import Pagination from "react-js-pagination";
-import PhotoListEntry from "./photo_list_entry.jsx";
-import FullSizePhotoContainer from "./full_size_photo_container.jsx";
+import FullSizePhotoContainer from "../full_size_photo/full_size_photo_container.jsx";
 import { withRouter, Route, Link } from "react-router-dom";
+import Style from "./style.scss";
 
 /*
   This component lists set amount of photos' thumbnails on a page.
