@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node server.js"
   },
+  "engines": {
+    "node": "10.15.1"
+  },
   "author": "Joni Tuhkanen",
   "license": "ISC",
   "dependencies": {
