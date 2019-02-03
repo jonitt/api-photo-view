@@ -7,56 +7,30 @@ import { Link } from "react-router-dom";
 
   @props:
     photoUrl: src of photo
-    linkTo = link to url, when background is clicked
+    linkTo: link to url, when background is clicked
+    zoomPicture: function for deciding the classes 
 */
 class FullSizePhoto extends React.Component {
   constructor(props) {
     super(props);
 
-    this.zoomPicture = this.zoomPicture.bind(this);
-
     this.state = {
       imgClass: "full_size_photo",
-      zoomed: false,
       infoClass: "full_size_photo_info"
-    }
-  }
-
-  componentDidMount() {
-    this.props.preventBodyScrolling();
-  }
-
-  componentWillUnmount() {
-    this.props.allowBodyScrolling();
-  }
-
-  zoomPicture() {
-    if(this.state.zoomed) {
-      this.setState({
-        imgClass: "full_size_photo",
-        zoomed: false,
-        infoClass: "full_size_photo_info"
-      });
-    }
-    else {
-      this.setState({
-        imgClass: "full_size_photo_zoomed",
-        zoomed: true,
-        infoClass: "hidden"
-      });
-    }
+    };
   }
 
   render() {
-    return(
+    return (
       <div className="full_size_photo_container">
-        <Link to={this.props.linkTo} className="grey_shade_background">
-        </Link>
+        <Link to={this.props.linkTo} className="grey_shade_background" />
         <div className="full_size_photo_image_info_container">
-          <img onClick={this.zoomPicture} src={this.props.photoUrl} className={this.state.imgClass}></img>
-          <div className={this.state.infoClass}>
-            {this.props.title}
-          </div>
+          <img
+            onClick={() => this.setState(this.props.zoomPicture)}
+            src={this.props.photoUrl}
+            className={this.state.imgClass}
+          />
+          <div className={this.state.infoClass}>{this.props.title}</div>
         </div>
       </div>
     );

@@ -70,6 +70,7 @@ body {
   margin: 0 $photo_list_entry_r_padding 7px 0;
   padding: 0;
   @include photoThumbnailDimensions();
+  background-color: #cbcdd4;
   overflow: hidden;
   display: inline-block;
 }

@@ -1,8 +1,8 @@
 // @Author: Joni Tuhkanen
 import React, { Component } from "react";
-import { withRouter, Link, Route, Switch, Redirect } from "react-router-dom";
 import PhotoList from "./photo_list.jsx";
 import PageHeader from "./page_header.jsx";
+import PhotoRouterContainer from "./photo_router_container.jsx";
 
 /*
   This is the main component. In charge of the shown components and some routing
@@ -20,59 +20,48 @@ class App extends Component {
     this.state = {
       photos: [],
       photosSize: 0,
-      showPhotoList: false
-    }
+      showPhotoList: false,
+      pageNumber: 1
+    };
   }
 
   fetchPhotos() {
     fetch(this.photosUrl)
       .then(res => res.json())
-      .then((json) => {
+      .then(json => {
         this.setState({
           photos: json,
-          photosSize: this.calcSize(json),
+          photosSize: json.length,
           showPhotoList: true
         });
       });
   }
 
-  /*
-  count the size of object, based on it's non-inherited properties
-  */
-  calcSize(obj) {
-    let key, size = 0;
-    for(key in obj) {
-      if(obj.hasOwnProperty(key)) {
-        size++;
-      }
-    }
-    return size;
-  }
-
-  redirectTo(url) {
-    this.props.history.push(url);
+  setPageNumber(num) {
+    this.setState({
+      pageNumber: num
+    });
   }
 
   render() {
-    return(
+    return (
       <div className="app">
         <PageHeader />
         {/*
           Routing for the listing of photos. By default, user is directed
           to the first page of photos.
         */}
-        <Switch>
-          <Route path={"/page:id(\\d+)"} render={({ match }) => { return(
-            this.state.showPhotoList ?
-            <PhotoList handleRedirect={(url) => this.redirectTo(url)} photos={this.state.photos} photosSize={this.state.photosSize} pageNumber={match.params.id} photosPerPage={this.photosPerPage} />
-            : null
-            )}}
-          />
-          <Redirect from="/" to="/page1" />
-        </Switch>
+        <PhotoRouterContainer
+          pageNumber="1"
+          photos={this.state.photos}
+          showPhotoList={this.state.showPhotoList}
+          handleRedirect={url => this.redirectTo(url)}
+          photosSize={this.state.photosSize}
+          photosPerPage={this.photosPerPage}
+        />
       </div>
     );
   }
 }
 
-export default withRouter(App);
+export default App;

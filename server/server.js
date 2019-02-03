@@ -1,12 +1,12 @@
 //Author: Joni Tuhkanen
 //this the main file of serverside
-const path = require('path');
+const path = require("path");
 const cors = require("cors");
 const express = require("express");
 
 const app = express();
 app.use(cors());
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   initiateHeader(res);
   next();
 });
@@ -23,10 +23,10 @@ function initiateHeader(res) {
   return res;
 }
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '/../dist/index.html'), e => {
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "/../dist/index.html"), e => {
     console.log(e);
-  })
+  });
 });
 
 app.listen(port, () => console.log("Listening on port " + port));

@@ -7,28 +7,14 @@ import { Link } from "react-router-dom";
 
   @props:
     photo: photo object
-    handleClick: handler for clicking the photo
-    num: index in a list
     linkTo: url where clicking the thumbnail directs to
 */
-class PhotoListEntry extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    }
-  }
-
-  render() {
-    return(
-      <li className="photo_list_entry">
-        <Link to={this.props.linkTo}>
-          <img className="photo_list_entry_img" onClick={() => this.props.handleClick(this.props.num)} src={this.props.photo.thumbnailUrl}></img>
-        </Link>
-      </li>
-    );
-  }
-}
+const PhotoListEntry = props => (
+  <li className="photo_list_entry">
+    <Link to={props.linkTo}>
+      <img className="photo_list_entry_img" src={props.photo.thumbnailUrl} />
+    </Link>
+  </li>
+);
 
 export default PhotoListEntry;
