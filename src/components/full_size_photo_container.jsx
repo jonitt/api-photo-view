@@ -38,20 +38,16 @@ class FullSizePhotoContainer extends React.Component {
   zoomPicture() {
     if (this.state.zoomed) {
       this.setState({
-        zoomed: false
-      });
-      return {
+        zoomed: false,
         imgClass: "full_size_photo",
         infoClass: "full_size_photo_info"
-      };
+      });
     } else {
       this.setState({
-        zoomed: true
-      });
-      return {
+        zoomed: true,
         imgClass: "full_size_photo_zoomed",
         infoClass: "hidden"
-      };
+      });
     }
   }
 
@@ -61,6 +57,8 @@ class FullSizePhotoContainer extends React.Component {
         linkTo={this.props.linkTo}
         photoUrl={this.props.photoUrl}
         title={this.props.title}
+        imgClass={this.state.imgClass}
+        infoClass={this.state.infoClass}
         zoomPicture={() => this.zoomPicture()}
       />
     );

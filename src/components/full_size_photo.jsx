@@ -8,33 +8,22 @@ import { Link } from "react-router-dom";
   @props:
     photoUrl: src of photo
     linkTo: link to url, when background is clicked
-    zoomPicture: function for deciding the classes 
+    zoomPicture: function for deciding the classes
+    imgClass: class of image
+    infoClass: class of info
 */
-class FullSizePhoto extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      imgClass: "full_size_photo",
-      infoClass: "full_size_photo_info"
-    };
-  }
-
-  render() {
-    return (
-      <div className="full_size_photo_container">
-        <Link to={this.props.linkTo} className="grey_shade_background" />
-        <div className="full_size_photo_image_info_container">
-          <img
-            onClick={() => this.setState(this.props.zoomPicture)}
-            src={this.props.photoUrl}
-            className={this.state.imgClass}
-          />
-          <div className={this.state.infoClass}>{this.props.title}</div>
-        </div>
-      </div>
-    );
-  }
-}
+const FullSizePhoto = (props) => (
+  <div className="full_size_photo_container">
+    <Link to={props.linkTo} className="grey_shade_background" />
+    <div className="full_size_photo_image_info_container">
+      <img
+        onClick={props.zoomPicture}
+        src={props.photoUrl}
+        className={props.imgClass}
+      />
+      <div className={props.infoClass}>{props.title}</div>
+    </div>
+  </div>
+);
 
 export default FullSizePhoto;

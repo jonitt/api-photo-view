@@ -14,114 +14,46 @@ import { withRouter, Route, Link } from "react-router-dom";
     photosSize: amount of photos
     pageNumber: number of page (starts from 1)
     photosPerPage: amount of photo thumbnails to show on a page
+    preventBodyScrolling: prevent scrolling of html body
+    allowBodyScrolling: alllow sctolling of html body
 */
-class PhotoList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      shownThumbnails: []
-    };
-  }
-
-  componentDidMount() {
-    this.showThumbnails();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.pageNumber != this.props.pageNumber) {
-      this.resetThumbnails();
-    }
-  }
-
-  //Creates components to show from photos' thumbnails.
-  //The thumbnails also work as links to the full-sized pictures
-  showThumbnails() {
-    let photosPerPage = parseInt(this.props.photosPerPage);
-    let i = photosPerPage * (parseInt(this.props.pageNumber) - 1);
-    let limit = i + photosPerPage;
-    for (; i < limit; i++) {
-      this.state.shownThumbnails[i] = (
-        <PhotoListEntry
-          linkTo={this.props.match.url + "/img/" + i}
-          num={i}
-          photo={this.props.photos[i]}
-          key={this.generateKey()}
-        />
-      );
-    }
-    this.setState({
-      shownThumbnails: this.state.shownThumbnails
-    });
-  }
-
-  //Remove old shown thumbnails and set new ones.
-  //Also, moves the user to top of page.
-  resetThumbnails() {
-    this.state.shownThumbnails = [];
-    this.showThumbnails();
-    window.scrollTo(0, 0);
-  }
-
-  //create random key
-  generateKey() {
-    return Math.random()
-      .toString(36)
-      .substr(2, 16);
-  }
-
-  allowBodyScrolling() {
-    document.body.classList.remove("no_scroll");
-  }
-
-  preventBodyScrolling() {
-    document.body.classList.add("no_scroll");
-  }
-
-  redirectTo(url) {
-    this.props.history.push(url);
-  }
-
-  render() {
-    return (
-      <div className="photo_list">
-        {this.state.shownFullSizePhoto}
-        <ul>{this.state.shownThumbnails}</ul>
-        {/* Pagination links lead to a page with matching number */}
-        <Pagination
-          onChange={pageNum => {
-            this.redirectTo("/page" + pageNum);
-          }}
-          activePage={parseInt(this.props.pageNumber)}
-          itemsCountPerPage={this.props.photosPerPage}
-          totalItemsCount={this.props.photosSize}
-          pageRangeDisplayed={5}
-          linkClass="photo_list_pagination_entry_link"
-          innerClass="photo_list_pagination"
-          activeClass="photo_list_pagination_selected"
-          activeLinkClass="photo_list_pagination_selected_link"
-          itemClassFirst="photo_list_pagination_entry photo_list_pagination_entry_first"
-          itemClass="photo_list_pagination_entry"
-          hideDisabled="true"
-        />
-        {/* Routing to full photos based on photo's number (id) */}
-        <Route
-          path={this.props.match.url + "/img/:id(\\d+)"}
-          render={({ match }) => {
-            return (
-              <FullSizePhotoContainer
-                photoUrl={this.props.photos[match.params.id].url}
-                title={this.props.photos[match.params.id].title}
-                linkTo={"/page" + this.props.pageNumber}
-                preventBodyScrolling={() => this.preventBodyScrolling()}
-                allowBodyScrolling={() => this.allowBodyScrolling()}
-              />
-            );
-          }}
-        />
-      </div>
-    );
-  }
-}
+const PhotoList = props => (
+  <div className="photo_list">
+    {props.shownFullSizePhoto}
+    <ul>{props.shownThumbnails}</ul>
+    {/* Pagination links lead to a page with matching number */}
+    <Pagination
+      onChange={pageNum => {
+        props.redirectTo("/page" + pageNum);
+      }}
+      activePage={parseInt(props.pageNumber)}
+      itemsCountPerPage={props.photosPerPage}
+      totalItemsCount={props.photosSize}
+      pageRangeDisplayed={5}
+      linkClass="photo_list_pagination_entry_link"
+      innerClass="photo_list_pagination"
+      activeClass="photo_list_pagination_selected"
+      activeLinkClass="photo_list_pagination_selected_link"
+      itemClassFirst="photo_list_pagination_entry photo_list_pagination_entry_first"
+      itemClass="photo_list_pagination_entry"
+      hideDisabled="true"
+    />
+    {/* Routing to full photos based on photo's number (id) */}
+    <Route
+      path={props.match.url + "/img/:id(\\d+)"}
+      render={({ match }) => {
+        return (
+          <FullSizePhotoContainer
+            photoUrl={props.photos[match.params.id].url}
+            title={props.photos[match.params.id].title}
+            linkTo={"/page" + props.pageNumber}
+            preventBodyScrolling={() => props.preventBodyScrolling()}
+            allowBodyScrolling={() => props.allowBodyScrolling()}
+          />
+        );
+      }}
+    />
+  </div>
+);
 
 export default withRouter(PhotoList);
