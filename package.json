@@ -1,6 +1,6 @@
 {
   "name": "pictureview",
-  "version": "1.0.0",
+  "version": "6.4.1",
   "description": "Tool for viewing pictures from api",
   "main": "./server/server.js",
   "scripts": {
